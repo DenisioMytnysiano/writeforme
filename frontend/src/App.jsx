@@ -8,10 +8,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/home" component={MainPage} />
-        <Route exact path="/poem/:poemId" component={PoemPage} />
-        <Route exact path="/register" component={RegisterPage} />
-        <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/home" element={<MainPage/>} />
+        <Route exact path="/poem/:poemId" element={<PoemPage/>} />
+        <Route exact path="/register" element={<RegisterPage/>} />
+        <Route exact path="/login" element={<LoginPage email="11" password="12323"/>} />
       </Routes>
     </BrowserRouter>
   )

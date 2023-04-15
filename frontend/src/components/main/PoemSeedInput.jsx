@@ -2,7 +2,14 @@ import { TextField } from "@mui/material";
 
 const PoemSeedInput = () => {
     return (
-        <TextField id="standard-basic" label="Standard" variant="standard" />
+        <TextField 
+            id="standard-basic"
+            label="Poem seed"
+            variant="outlined"
+            fullWidth="true" 
+            defaultValue=""
+            InputLabelProps={{ shrink: true }}
+          />
     )
 }
 

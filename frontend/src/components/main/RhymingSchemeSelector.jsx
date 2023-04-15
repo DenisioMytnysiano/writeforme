@@ -1,11 +1,20 @@
-import {Select, MenuItem} from '@mui/material';
+import {TextField,  MenuItem} from '@mui/material';
 
 const RhymingSchemeSelector = () => {
-<Select labelId="demo-simple-select-label"id="demo-simple-select"value={age}label="ABAB"onChange={handleChange}>
-    <MenuItem value={"ABAB"}>ABAB</MenuItem>
-    <MenuItem value={"AABB"}>AABB</MenuItem>
-    <MenuItem value={"BAAB"}>BAAB</MenuItem>
-  </Select>
+  return (
+    <TextField 
+      labelId="demo-simple-select-label"
+      id="demo-simple-select" 
+      value={"ABAB"} 
+      label="Rhyme" 
+      select
+      style={{width: 100}}
+    >
+      <MenuItem value={"ABAB"}>ABAB</MenuItem>
+      <MenuItem value={"AABB"}>AABB</MenuItem>
+      <MenuItem value={"BAAB"}>BAAB</MenuItem>
+    </TextField>
+  )
 }
 
 export default RhymingSchemeSelector;
