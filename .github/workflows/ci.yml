@@ -50,4 +50,14 @@ jobs:
         with:
           context: ./frontend
           push: true
-          tags: ghcr.io/denisiomytnysiano/writeforme-frontend:${{ github.sha }}
+          tags: ghcr.io/denisiomytnysiano/writeforme-frontend:${{ github.sha }
+  
+  build_backend:
+    runs-on: ubuntu-latest
+  
+  push_backend:
+    runs-on: ubuntu-latest
+    
+  update_manifests:
+    runs-on: ubuntu-latest
+    needs: [push_frontend, push_backend]
