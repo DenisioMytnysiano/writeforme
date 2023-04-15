@@ -49,6 +49,6 @@ jobs:
       - name: Build and push frontend image
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: ./frontend
           push: true
           tags: ghcr.io/denisiomytnysiano/writeforme-frontend:${{ github.sha }}
