@@ -37,7 +37,7 @@ jobs:
         run: |
           npm install
           
-      - name: build
+      - name: Build frontend
         run: |
           npm run build
           
@@ -65,20 +65,20 @@ jobs:
         name: Cache Docker layers
         uses: actions/cache@v2
         with:
-          path: /tmp/.buildx-cache
+          path: /tmp/frontend/.buildx-cache
           key: ${{ runner.os }}-buildx-db-restore-${{ github.sha }}
           restore-keys: ${{ runner.os }}-buildx-db-restore-
       -
-        name: Build DB restore image
+        name: Build frontend image
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
           tags: ghcr.io/denisiomytnysiano/writeforme-frontend:${{ github.sha }}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new
+          cache-from: type=local,src=/tmp/frontend/.buildx-cache
+          cache-to: type=local,dest=/tmp/frontend/.buildx-cache-new
       -
         name: Move cache
         run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+          rm -rf /tmp/frontend/.buildx-cache
+          mv /tmp/frontend/.buildx-cache-new /tmp/frontend/.buildx-cache
