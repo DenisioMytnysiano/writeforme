@@ -2,12 +2,12 @@ import React from "react";
 import {Stack, Container, Button} from "@mui/material";
 import RhymingSchemeSelector from '../components/main/RhymingSchemeSelector';
 import PoemSeedInput from '../components/main/PoemSeedInput';
-import AppBar from '../components/common/AppBar';
+import ResponsiveAppBar from '../components/common/AppBar';
 
 const MainPage = () => {
     return (
         <Stack spacing={4} alignItems="center">
-            <AppBar/>
+            <ResponsiveAppBar/>
             <Container style={{width: "70%"}}>
                 <Stack direction="column" justifyContent="center" spacing={2}>
                     <Stack direction="row" justifyContent="center" alignItems="stretch" spacing={1}>
