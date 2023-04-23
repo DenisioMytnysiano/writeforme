@@ -1,6 +1,5 @@
-from fastapi import APIRouter
-
 from api.schemas.auth import LoginRequest, RegisterRequest, TokenResponse
+from fastapi import APIRouter
 
 router = APIRouter()
 
@@ -18,6 +17,7 @@ def register(user: RegisterRequest):
 @router.post("/refresh-token", response_model=TokenResponse)
 def refresh_token():
     pass
+
 
 @router.post("/logout")
 def logout():

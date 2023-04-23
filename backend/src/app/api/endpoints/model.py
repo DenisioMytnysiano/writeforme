@@ -1,6 +1,5 @@
-from fastapi import APIRouter, Depends
-
 from api.schemas.model import GeneratePoemRequest, GeneratePoemResponse
+from fastapi import APIRouter, Depends
 
 router = APIRouter()
 

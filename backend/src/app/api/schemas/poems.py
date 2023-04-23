@@ -1,6 +1,5 @@
-from pydantic import BaseModel
-
 from hexagon.domain.rhyming_scheme import RhymingScheme
+from pydantic import BaseModel
 
 
 class PoemResponse(BaseModel):
