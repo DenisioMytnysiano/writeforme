@@ -7,5 +7,8 @@ router = APIRouter()
 
 
 @router.get("/generate", response_model=GeneratePoemResponse)
-def generate_poem(generate_params: GeneratePoemRequest = Depends(), tokens: AuthTokenPair = Depends(jwtTokenBearer)):
+def generate_poem(
+    generate_params: GeneratePoemRequest = Depends(),
+    tokens: AuthTokenPair = Depends(jwtTokenBearer),
+):
     pass

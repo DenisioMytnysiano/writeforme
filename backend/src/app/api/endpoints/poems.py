@@ -20,7 +20,10 @@ def get_poems(paging: PaginationParams = Depends()):
 
 
 @router.get("/mine", response_model=list[PoemResponse])
-def get_my_poems(paging: PaginationParams = Depends(), tokens: AuthTokenPair = Depends(jwtTokenBearer)):
+def get_my_poems(
+    paging: PaginationParams = Depends(),
+    tokens: AuthTokenPair = Depends(jwtTokenBearer),
+):
     pass
 
 

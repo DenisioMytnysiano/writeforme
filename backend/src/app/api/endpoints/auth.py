@@ -1,9 +1,7 @@
-from api.schemas.auth import RegisterRequest, TokenResponse
+from api.schemas.auth import LoginRequest, RegisterRequest, TokenResponse
 from fastapi import APIRouter, Depends
-from api.schemas.auth import LoginRequest
 from infrastructure.auth.auth_token_pair import AuthTokenPair
 from infrastructure.auth.oauth_bearer_cookie import jwtTokenBearer
-
 
 router = APIRouter()
 
