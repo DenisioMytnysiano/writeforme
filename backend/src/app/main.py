@@ -1,10 +1,8 @@
 import uvicorn
-from fastapi import FastAPI
 from api.api import api_router
+from fastapi import FastAPI
 
-app = FastAPI(
-    title="WriteForMe", openapi_url=f"/openapi.json"
-)
+app = FastAPI(title="WriteForMe", openapi_url=f"/openapi.json")
 
 app.include_router(api_router)
 
