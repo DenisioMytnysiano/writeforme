@@ -9,6 +9,7 @@ license = "MIT"
 python = "^3.9"
 fastapi = "^0.95.1"
 uvicorn = "^0.21.1"
+pydantic = {extras = ["email"], version = "^1.10.7"}
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^3.2.2"
