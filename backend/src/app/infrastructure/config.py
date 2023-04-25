@@ -17,7 +17,9 @@ class DbConfig:
 
 class JwtConfig:
     SECRET_KEY: str = os.getenv("JWT_SECRET")
-
+    JWT_ALGORITHM: str = os.getenv("JWT_ALGORITHM")
+    ACCESS_TOKEN_EXPIRE_MINUTES = os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES")
+    REFRESH_TOKEN_EXPIRE_MINUTES = os.getenv("REFRESH_TOKEN_EXPIRE_MINUTES")
 
 class GlobalConfig:
     DB_SETTINGS: DbConfig = DbConfig()

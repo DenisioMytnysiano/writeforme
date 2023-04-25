@@ -9,4 +9,4 @@ class Poem(Base):
     title = Column(String, nullable=False)
     text = Column(String, nullable=False)
     created_by =  Column(UUID(as_uuid=True), ForeignKey("user.id"))
-    owner = relationship("User",back_populates="poems")
+    owner = relationship("User", back_populates="poems")
