@@ -1,10 +1,11 @@
 from typing import Dict, Optional
 
-from fastapi import HTTPException, Request, status
+from fastapi import Depends, HTTPException, Request, status
 from fastapi.openapi.models import OAuthFlows as OAuthFlowsModel
 from fastapi.security import OAuth2
 from fastapi.security.utils import get_authorization_scheme_param
 from infrastructure.auth.auth_token_pair import AuthTokenPair
+from infrastructure.security.token_service import TokenService
 
 
 class OAuth2PasswordBearerWithCookie(OAuth2):
@@ -20,9 +21,13 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
         flows = OAuthFlowsModel(password={"tokenUrl": tokenUrl, "scopes": scopes})
         super().__init__(flows=flows, scheme_name=scheme_name, auto_error=auto_error)
 
-    async def __call__(self, request: Request) -> AuthTokenPair:
+    async def __call__(
+        self, request: Request, tokenService: TokenService = Depends(TokenService)
+    ) -> AuthTokenPair:
         access_token = self.get_access_token_from_header(request)
         refresh_token = self.get_refresh_token_from_cookie(request)
+        tokenService.verify(access_token)
+        tokenService.verify(refresh_token)
         return access_token, refresh_token
 
     async def get_access_token_from_header(self, request: Request):

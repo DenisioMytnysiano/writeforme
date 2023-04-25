@@ -5,3 +5,4 @@ from dataclasses import dataclass
 class User:
     name: str
     email: str
+    hashed_pasword: str
