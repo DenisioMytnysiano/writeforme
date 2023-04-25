@@ -1,8 +1,9 @@
 import os
-from dotenv import load_dotenv
 from pathlib import Path
 
-env_path = Path('.') / '.env'
+from dotenv import load_dotenv
+
+env_path = Path(".") / ".env"
 load_dotenv(dotenv_path=env_path)
 
 
@@ -20,6 +21,7 @@ class JwtConfig:
     JWT_ALGORITHM: str = os.getenv("JWT_ALGORITHM")
     ACCESS_TOKEN_EXPIRE_MINUTES = os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES")
     REFRESH_TOKEN_EXPIRE_MINUTES = os.getenv("REFRESH_TOKEN_EXPIRE_MINUTES")
+
 
 class GlobalConfig:
     DB_SETTINGS: DbConfig = DbConfig()
