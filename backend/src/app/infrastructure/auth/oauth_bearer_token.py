@@ -8,7 +8,7 @@ from infrastructure.auth.auth_token_pair import AuthTokenPair
 from infrastructure.security.token_service import TokenService
 
 
-class OAuth2PasswordBearerWithCookie(OAuth2):
+class OAuth2PasswordBearerWithToken(OAuth2):
     def __init__(
         self,
         tokenUrl: str,
@@ -23,12 +23,11 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
 
     async def __call__(
         self, request: Request, tokenService: TokenService = Depends(TokenService)
-    ) -> AuthTokenPair:
+    ) -> str:
         access_token = self.get_access_token_from_header(request)
-        refresh_token = self.get_refresh_token_from_cookie(request)
         tokenService.verify(access_token)
-        tokenService.verify(refresh_token)
-        return AuthTokenPair(access_token, refresh_token)
+        return access_token
+        
 
     def get_access_token_from_header(self, request: Request):
         authorization: str = request.headers.get("Authorization")
@@ -59,4 +58,4 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
         return refresh_token
 
 
-jwtRefreshTokenBearer = OAuth2PasswordBearerWithCookie(tokenUrl="/auth/login")
+jwtTokenBearer = OAuth2PasswordBearerWithToken(tokenUrl="/auth/login")

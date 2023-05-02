@@ -6,5 +6,5 @@ from uuid import UUID
 class Poem:
     id: UUID
     title: str
-    created_by: str
+    created_by: UUID
     text: str

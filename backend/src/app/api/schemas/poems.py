@@ -1,9 +1,13 @@
+from uuid import UUID
 from hexagon.domain.rhyming_scheme import RhymingScheme
 from pydantic import BaseModel
 
-
 class PoemResponse(BaseModel):
     title: str
-    created_by: str
+    created_by: UUID
     text: str
-    rhyming_scheme: RhymingScheme
+
+class PoemSaveRequest(BaseModel):
+    title: str
+    text: str
+

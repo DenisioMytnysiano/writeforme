@@ -1,4 +1,5 @@
 from typing import NoReturn, Optional
+from uuid import UUID
 
 from fastapi import Depends
 from hexagon.domain.user import User
@@ -18,3 +19,6 @@ class UserRepository:
 
     def get_user_by_email(self, email: str) -> Optional[User]:
         return self.__db_session.query(UserDB).where(UserDB.email == email).first()
+
+    def get_user_by_id(self, id: UUID) -> Optional[User]:
+        return self.__db_session.query(UserDB).where(UserDB.id == id).first()

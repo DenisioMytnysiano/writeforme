@@ -2,14 +2,14 @@ from datetime import datetime
 from typing import NoReturn, Protocol
 
 from fastapi import Depends
+from hexagon.domain.user import User
+from hexagon.ports.user_service import UserServiceProtocol
+from hexagon.use_cases.user_service import UserService
 from infrastructure.db.models.refresh_session import RefreshSession
 from infrastructure.auth.refresh_session_store import RefreshSessionStore
 from infrastructure.auth.refresh_session_store import RefreshSessionStoreProtocol
-from hexagon.ports.user_repository import UserRepositoryProtocol
 from infrastructure.auth.auth_token_pair import AuthTokenPair
 from infrastructure.config import config
-from infrastructure.db.models.user import User
-from infrastructure.repositories.user_repository import UserRepository
 from infrastructure.security.hasher import Hasher
 from infrastructure.security.token_service import TokenService, TokenServiceProtocol
 
@@ -31,7 +31,7 @@ class AuthServiceProtocol(Protocol):
 class AuthService:
     def __init__(
         self,
-        user_repository: UserRepositoryProtocol = Depends(UserRepository),
+        user_repository: UserServiceProtocol = Depends(UserService),
         hasher: Hasher = Depends(Hasher),
         token_service: TokenServiceProtocol = Depends(TokenService),
         refresh_session_store: RefreshSessionStoreProtocol = Depends(
