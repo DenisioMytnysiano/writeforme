@@ -28,9 +28,9 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
         refresh_token = self.get_refresh_token_from_cookie(request)
         tokenService.verify(access_token)
         tokenService.verify(refresh_token)
-        return access_token, refresh_token
+        return AuthTokenPair(access_token, refresh_token)
 
-    async def get_access_token_from_header(self, request: Request):
+    def get_access_token_from_header(self, request: Request):
         authorization: str = request.headers.get("Authorization")
         scheme, access_token = get_authorization_scheme_param(authorization)
         if not authorization or scheme.lower() != "bearer":
@@ -44,7 +44,7 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
                 return None
         return access_token
 
-    async def get_refresh_token_from_cookie(self, request: Request):
+    def get_refresh_token_from_cookie(self, request: Request):
         authorization: str = request.cookies.get("refresh_token")
         scheme, refresh_token = get_authorization_scheme_param(authorization)
         if not authorization or scheme.lower() != "bearer":

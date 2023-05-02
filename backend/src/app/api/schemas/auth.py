@@ -4,6 +4,7 @@ from pydantic import BaseModel, EmailStr
 class LoginRequest(BaseModel):
     email: EmailStr
     password: str
+    fingerprint: str
 
 
 class TokenResponse(BaseModel):
@@ -13,3 +14,6 @@ class TokenResponse(BaseModel):
 class RegisterRequest(BaseModel):
     email: EmailStr
     password: str
+
+class RefreshTokenRequest(BaseModel):
+    fingerprint: str

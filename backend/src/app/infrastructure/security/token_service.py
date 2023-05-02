@@ -13,7 +13,7 @@ class TokenServiceProtocol(Protocol):
     def verify(self, token: str) -> bool:
         pass
 
-    def payload(self, token: str) -> str:
+    def payload(self, token: str) -> dict:
         pass
 
 
@@ -39,4 +39,4 @@ class TokenService:
             return False
 
     def payload(self, token: str) -> str:
-        return jwt.decode(token)
+        return jwt.decode(token, config.JWT_SETTINGS.SECRET_KEY, config.JWT_SETTINGS.JWT_ALGORITHM)
