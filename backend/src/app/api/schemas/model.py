@@ -10,5 +10,4 @@ class GeneratePoemRequest(BaseModel):
 
 
 class GeneratePoemResponse(BaseModel):
-    poem_id: UUID
     poem: str

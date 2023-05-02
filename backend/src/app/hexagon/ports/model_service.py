@@ -1,6 +1,6 @@
 from typing import Protocol
 
-from app.hexagon.domain.rhyming_scheme import RhymingScheme
+from hexagon.domain.rhyming_scheme import RhymingScheme
 
 
 class ModelServiceProtocol(Protocol):

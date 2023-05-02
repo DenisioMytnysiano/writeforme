@@ -1,7 +1,11 @@
-from app.hexagon.domain.rhyming_scheme import RhymingScheme
-from app.hexagon.ports.model_service import ModelServiceProtocol
+from hexagon.domain.rhyming_scheme import RhymingScheme
 
 
-class ModelService(ModelServiceProtocol):
-    def generate(rhyming: RhymingScheme, poem_prompt: str) -> str:
-        pass
+class ModelService:
+    def generate(self, rhyming: RhymingScheme, poem_prompt: str) -> str:
+        return '''
+        Встала весна, чорну землю
+        Сонну розбудила,
+        Уквітчала її рястом,
+        Барвінком укрила;
+        '''

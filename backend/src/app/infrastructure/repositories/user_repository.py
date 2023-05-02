@@ -18,7 +18,11 @@ class UserRepository:
         self.__db_session.commit()
 
     def get_user_by_email(self, email: str) -> Optional[User]:
-        return self.__db_session.query(UserDB).where(UserDB.email == email).first()
+        user = self.__db_session.query(UserDB).where(UserDB.email == email).first()
+        if user:
+            return User(user.id, user.name, user.email, user.hashed_password)
 
     def get_user_by_id(self, id: UUID) -> Optional[User]:
-        return self.__db_session.query(UserDB).where(UserDB.id == id).first()
+        user = self.__db_session.query(UserDB).where(UserDB.id == id).first()
+        if user:
+            return User(user.id, user.name, user.email, user.hashed_password)
