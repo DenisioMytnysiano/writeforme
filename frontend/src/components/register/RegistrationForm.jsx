@@ -3,16 +3,32 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import AuthService from '../../services/auth.service';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+const RegistrationForm = () => {
 
-const RegistrationForm = ({email, password}) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
+
+    const handleLogin = event => {
+        event.preventDefault();
+        AuthService.register(email, password)
+          .then(() => navigate('/home'))
+          .catch(err => setError(err.message));
+      };
+
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: "20%" }}>
+            {error ? (<Typography component="h1" variant="h5">{error}</Typography>) : null}
             <Typography component="h1" variant="h5">Register</Typography>
             <Box component="form" noValidate sx={{ mt: 1 }}>
-                <TextField margin="normal" required fullWidth id="email" value={email} label="Email Address" name="email" autoComplete="email" autoFocus />
-                <TextField margin="normal" required fullWidth name="password" value={password} label="Password" type="password" id="password" autoComplete="current-password" />
-                <Button fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>Register</Button>
+                <TextField margin="normal" required fullWidth id="email" value={email} label="Email Address" name="email" autoComplete="email" autoFocus onChange={e => setEmail(e.target.value)}/>
+                <TextField margin="normal" required fullWidth name="password" value={password} label="Password" type="password" id="password" autoComplete="current-password" onChange={e => setPassword(e.target.value)}/>
+                <Button fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} onClick={handleLogin}>Register</Button>
             </Box>
         </Box>
     )
