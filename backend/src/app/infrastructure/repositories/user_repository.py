@@ -14,7 +14,8 @@ class UserRepository:
         self.__db_session = db_session
 
     def add_user(self, user: User) -> NoReturn:
-        self.__db_session.add(user)
+        db_user = UserDB(id=user.id, name=user.name, email=user.email, hashed_password=user.hashed_pasword)
+        self.__db_session.add(db_user)
         self.__db_session.commit()
 
     def get_user_by_email(self, email: str) -> Optional[User]:

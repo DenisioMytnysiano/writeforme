@@ -1,5 +1,6 @@
 from datetime import datetime
 from typing import NoReturn, Protocol
+import uuid
 
 from fastapi import Depends
 from hexagon.domain.user import User
@@ -21,7 +22,7 @@ class AuthServiceProtocol(Protocol):
     def login(self, email: str, password: str, fingerprint: str) -> AuthTokenPair:
         pass
 
-    def refresh_token(self, tokens: AuthTokenPair, fingerprint: str) -> AuthTokenPair:
+    def refresh_token(self, refresh_token: str, fingerprint: str) -> AuthTokenPair:
         pass
 
     def logout(self, tokens: AuthTokenPair) -> NoReturn:
@@ -49,14 +50,14 @@ class AuthService:
             raise Exception("User already registered with email.")
         hashed_password = self.__hasher.hash(password)
         self.__user_repository.add_user(
-            User(email=email, name="test", hashed_password=hashed_password)
+            User(id=uuid.uuid4(), email=email, name="test", hashed_pasword=hashed_password)
         )
 
     def login(self, email: str, password: str, fingerprint: str) -> AuthTokenPair:
         user = self.__user_repository.get_user_by_email(email)
         if not user:
             raise Exception("User is not registered with email.")
-        self.__hasher.verify(password, user.hashed_password)
+        self.__hasher.verify(password, user.hashed_pasword)
         access_token = self.__token_service.generate(
             {"sub": email}, int(
                 config.JWT_SETTINGS.ACCESS_TOKEN_EXPIRE_MINUTES)
@@ -68,12 +69,11 @@ class AuthService:
         self.__refresh_session_store.add_session(session=RefreshSession(email=email, refresh_token=refresh_token, fingerprint=fingerprint))
         return AuthTokenPair(access_token, refresh_token)
 
-    def refresh_token(self, tokens: AuthTokenPair, fingerprint: str) -> AuthTokenPair:
-        session = self.__refresh_session_store.delete_and_get_session(
-            tokens.refresh_token)
+    def refresh_token(self, refresh_token: str, fingerprint: str) -> AuthTokenPair:
+        session = self.__refresh_session_store.delete_and_get_session(refresh_token)
         if not session or session.fingerprint != fingerprint:
             raise Exception("Session not found")
-        email = self.__token_service.payload(tokens.access_token)["sub"]
+        email = self.__token_service.payload(refresh_token)["sub"]
         access_token = self.__token_service.generate( {"sub": email}, int(config.JWT_SETTINGS.ACCESS_TOKEN_EXPIRE_MINUTES))
         refresh_token = self.__token_service.generate({"sub": email}, int(config.JWT_SETTINGS.ACCESS_TOKEN_EXPIRE_MINUTES))
         self.__refresh_session_store.add_session(session=RefreshSession(email=email, refresh_token=refresh_token, fingerprint=fingerprint))

@@ -42,20 +42,5 @@ class OAuth2PasswordBearerWithToken(OAuth2):
             else:
                 return None
         return access_token
-
-    def get_refresh_token_from_cookie(self, request: Request):
-        authorization: str = request.cookies.get("refresh_token")
-        scheme, refresh_token = get_authorization_scheme_param(authorization)
-        if not authorization or scheme.lower() != "bearer":
-            if self.auto_error:
-                raise HTTPException(
-                    status_code=status.HTTP_401_UNAUTHORIZED,
-                    detail="Not authenticated",
-                    headers={"WWW-Authenticate": "Bearer"},
-                )
-            else:
-                return None
-        return refresh_token
-
-
+    
 jwtTokenBearer = OAuth2PasswordBearerWithToken(tokenUrl="/auth/login")

@@ -18,8 +18,8 @@ def register(user: RegisterRequest, auth_service: AuthServiceProtocol = Depends(
 
 
 @router.post("/refresh-token", response_model=TokenResponse)
-def refresh_token(response: Response, refresh_request: RefreshTokenRequest, tokens: AuthTokenPair = Depends(jwtRefreshTokenBearer),auth_service: AuthServiceProtocol = Depends(AuthService)):
-    token_pair = auth_service.refresh_token(tokens, refresh_request.fingerprint)
+def refresh_token(response: Response, refresh_request: RefreshTokenRequest, refresh_token: str = Depends(jwtRefreshTokenBearer),auth_service: AuthServiceProtocol = Depends(AuthService)):
+    token_pair = auth_service.refresh_token(refresh_token, refresh_request.fingerprint)
     response.set_cookie(key="refresh_token", value=f"Bearer {token_pair.refresh_token}", path="/auth", httponly=True)
     return token_pair
 
