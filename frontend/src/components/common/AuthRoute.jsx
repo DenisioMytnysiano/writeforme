@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import AuthService from '../../services/auth.service';
 
 const AuthRoute = ({ children, onAuthenticated, redirectUrl }) => {
-    const sholdRedirect = !AuthService.isAuthenticated() && !onAuthenticated || AuthService.isAuthenticated() && onAuthenticated;
+    const sholdRedirect = (!AuthService.isAuthenticated() && !onAuthenticated) || (AuthService.isAuthenticated() && onAuthenticated);
     if (sholdRedirect) {
         return <Navigate to={redirectUrl} />;
     }
