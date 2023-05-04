@@ -11,7 +11,7 @@ router = APIRouter()
 @router.post("/generate", response_model=GeneratePoemResponse)
 def generate_poem(
     generate_params: GeneratePoemRequest,
-    user: User = Depends(get_authorized_user), model_service: ModelServiceProtocol = Depends(ModelService)
+     user: User = Depends(get_authorized_user), model_service: ModelServiceProtocol = Depends(ModelService)
 ):
     poem = model_service.generate(generate_params.rhyming_scheme, generate_params.text_prompt)
     return GeneratePoemResponse(poem=poem)

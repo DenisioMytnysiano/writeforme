@@ -14,7 +14,7 @@ class PoemRepository:
         self.__db_session = db_session
 
     def get_all_poems(self, page: int, items_per_page: int) -> Collection[Poem]:
-        poems = self.__db_session.query(PoemDB).offset(page).limit(items_per_page).all()
+        poems = self.__db_session.query(PoemDB).offset((page - 1) * items_per_page).limit(items_per_page).all()
         return [Poem(poem_db.id, poem_db.title, poem_db.created_by, poem_db.text) for poem_db in poems]
 
     def get_all_poems_by_user(
@@ -22,7 +22,7 @@ class PoemRepository:
     ) -> Collection[Poem]:
         poems = self.__db_session.query(PoemDB) \
             .where(PoemDB.created_by == created_by) \
-            .offset(page) \
+            .offset((page - 1) * items_per_page) \
             .limit(items_per_page) \
             .all()
         
