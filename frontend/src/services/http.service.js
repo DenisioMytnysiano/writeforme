@@ -10,7 +10,7 @@ export const HttpService = function ({ withAuth } = false) {
       if (AuthService.isAccessTokenExpired()) {
         AuthService.refreshTokens().catch(err => Promise.reject(err));
       }
-      request.headers.authorization = AuthService.getAccessToken();
+      request.headers.authorization = `Bearer ${AuthService.getAccessToken()}`;;
       request.withCredentials = true;
       return request;
     });

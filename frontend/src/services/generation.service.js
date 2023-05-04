@@ -7,3 +7,5 @@ class GenerationService{
         return response.data.poem;
     }
 }
+
+export default GenerationService;

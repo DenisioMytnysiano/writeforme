@@ -54,23 +54,23 @@ class AuthService {
     }
 
     static isAccessTokenExpired() {
-        if(!Boolean(AuthStore.expiresAt)){
-            return false;
-        }
-        const expDate = AuthStore.expiresAt - 10;
+        const expDate = AuthStore.getExpiresAt() - 10;
         const nowDate = Math.floor(new Date().getTime() / 1000);
         return expDate <= nowDate;
       }
     
       static isAuthenticated() {
+        if(!AuthStore.getAuthorized()){
+            return false
+        }
         return this.isAccessTokenExpired()
-          ? this.refreshTokens().then(() => AuthStore.accessToken)
-          : Boolean(AuthStore.accessToken) && !this.isAccessTokenExpired();
+          ? this.refreshTokens().then(() => AuthStore.getAccessToken())
+          : Boolean(AuthStore.getAccessToken()) && !this.isAccessTokenExpired();
       }
     
       static getAccessToken() {
         if (!this.isAuthenticated()) throw new Error();
-        return AuthStore.accessToken;
+        return AuthStore.getAccessToken();
       }
 }
 

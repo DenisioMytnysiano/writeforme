@@ -1,21 +1,37 @@
-import { makeAutoObservable, runInAction } from 'mobx';
 
 class AuthStore {
-  constructor() {
-    this.resetAuthData();
-    makeAutoObservable(this);
+
+  setAuthData = (accessToken)  => {
+    const { exp: expiresAt, sub } = JSON.parse(atob(accessToken.split('.')[1]));
+    localStorage.setItem("expiresAt", expiresAt);
+    localStorage.setItem("accessToken", accessToken);
+    localStorage.setItem("sub", sub);
+    localStorage.setItem("authorized", true);
   }
 
-  async setAuthData(accessToken) {
-    const { exp: expiresAt, sub: sub } = JSON.parse(atob(accessToken.split('.')[1]));
-    runInAction(() => {
-      Object.assign(this, { accessToken, expiresAt, sub });
-    });
+  resetAuthData = () => {
+    localStorage.removeItem("expiresAt");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("sub");
+    localStorage.setItem("authorized", false)
   }
 
-  resetAuthData() {
-    this.accessToken = this.expiresAt = this.sub = undefined;
+  getExpiresAt() {
+    return localStorage.getItem("expiresAt");
+  }
+
+  getAccessToken(){
+    return localStorage.getItem("accessToken");
+  }
+
+  getCurrentEmail(){
+    return localStorage.getItem("sub");
+  }
+
+  getAuthorized(){
+    return localStorage.getItem("authorized") === "true"
   }
 }
 
-export default new AuthStore();
+const authStore = new AuthStore();
+export default authStore;

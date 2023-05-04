@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material";
 
-const PoemSeedInput = () => {
+const PoemSeedInput = ({onChange}) => {
     return (
         <TextField 
             id="standard-basic"
@@ -9,6 +9,7 @@ const PoemSeedInput = () => {
             fullWidth="true" 
             defaultValue=""
             InputLabelProps={{ shrink: true }}
+            onChange = {(e) => onChange(e.target.value)}
           />
     )
 }

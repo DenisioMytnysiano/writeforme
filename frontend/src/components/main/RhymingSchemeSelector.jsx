@@ -1,14 +1,14 @@
 import {TextField,  MenuItem} from '@mui/material';
 
-const RhymingSchemeSelector = () => {
+const RhymingSchemeSelector = ({onChange}) => {
   return (
     <TextField 
-      labelId="demo-simple-select-label"
       id="demo-simple-select" 
       value={"ABAB"} 
       label="Rhyme" 
       select
       style={{width: 100}}
+      onChange={e => onChange(e.target.value)}
     >
       <MenuItem value={"ABAB"}>ABAB</MenuItem>
       <MenuItem value={"AABB"}>AABB</MenuItem>
