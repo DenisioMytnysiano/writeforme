@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import AuthService from '../../services/auth.service';
 import {useNavigate} from 'react-router-dom';
+import validateEmail from '../../utils/email-validator';
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -14,10 +15,24 @@ const LoginForm = () => {
 
     const handleLogin = event => {
         event.preventDefault();
-        AuthService.login(email, password)
-          .then(() => navigate('/home'))
-          .catch(err => setError(err.message));
+        if(validateState()){
+            AuthService.login(email, password)
+            .then(() => navigate('/home'))
+            .catch(err => setError(err.message));
+        }
       };
+
+    const validateState = () => {
+        return true;
+        if(!validateEmail(email)){
+            setError("Invalid email value")
+            return false;
+        }
+        if(password.length == 0){
+            setError("Password is empty")
+            return false;
+        }
+    }
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: "20%" }}>

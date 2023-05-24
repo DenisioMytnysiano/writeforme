@@ -15,5 +15,6 @@ class RegisterRequest(BaseModel):
     email: EmailStr
     password: str
 
+
 class RefreshTokenRequest(BaseModel):
     fingerprint: str

@@ -1,5 +1,6 @@
-from api.endpoints import auth, model, poems
 from fastapi import APIRouter
+
+from api.endpoints import auth, model, poems
 
 api_router = APIRouter()
 api_router.include_router(auth.router, prefix="/auth", tags=["auth"])

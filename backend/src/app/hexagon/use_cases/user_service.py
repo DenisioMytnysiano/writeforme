@@ -9,8 +9,9 @@ from infrastructure.repositories.user_repository import UserRepository
 
 
 class UserService:
-
-    def __init__(self, user_repository: UserRepositoryProtocol = Depends(UserRepository)) -> None:
+    def __init__(
+        self, user_repository: UserRepositoryProtocol = Depends(UserRepository)
+    ) -> None:
         super().__init__()
         self.__user_repository = user_repository
 
@@ -19,6 +20,6 @@ class UserService:
 
     def get_user_by_email(self, email: str) -> Optional[User]:
         return self.__user_repository.get_user_by_email(email)
-        
-    def get_user_by_id(self, id: UUID) -> Optional[User]:
-        return self.__user_repository.get_user_by_id(id)
+
+    def get_user_by_id(self, identifier: UUID) -> Optional[User]:
+        return self.__user_repository.get_user_by_id(identifier)

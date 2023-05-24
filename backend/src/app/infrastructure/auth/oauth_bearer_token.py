@@ -4,7 +4,7 @@ from fastapi import Depends, HTTPException, Request, status
 from fastapi.openapi.models import OAuthFlows as OAuthFlowsModel
 from fastapi.security import OAuth2
 from fastapi.security.utils import get_authorization_scheme_param
-from infrastructure.auth.auth_token_pair import AuthTokenPair
+
 from infrastructure.security.token_service import TokenService
 
 
@@ -27,7 +27,6 @@ class OAuth2PasswordBearerWithToken(OAuth2):
         access_token = self.get_access_token_from_header(request)
         tokenService.verify(access_token)
         return access_token
-        
 
     def get_access_token_from_header(self, request: Request):
         authorization: str = request.headers.get("Authorization")
@@ -42,5 +41,6 @@ class OAuth2PasswordBearerWithToken(OAuth2):
             else:
                 return None
         return access_token
-    
+
+
 jwtTokenBearer = OAuth2PasswordBearerWithToken(tokenUrl="/auth/login")

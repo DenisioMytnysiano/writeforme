@@ -16,7 +16,7 @@ const PoetryPagination = ({type}) => {
       renderItem={(item) => (
         <PaginationItem
           component={Link}
-          to={`/poems?type=${type}&page=${item.page}`}
+          to={`/${type==="mine"? "my-poems" : "poems"}?page=${item.page}`}
           {...item}
         />
       )}

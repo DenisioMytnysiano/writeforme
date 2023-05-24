@@ -7,22 +7,32 @@ import { useLocation } from "react-router-dom";
 import ResponsiveAppBar from "../components/common/AppBar";
 
 
-const PoetryPage = () => {
+const PoetryPage = ({type}) => {
     const location = useLocation();
     const query = new URLSearchParams(location.search);
     const page = parseInt(query.get('page') || '1', 10);
-    const type = query.get("type") || 'all';
     const itemsPerPage = 10;
 
     const [poems, setPoems] = useState([])
     useEffect(() => {
-        PoetryService.getAllPoems(page, itemsPerPage)
-            .then(p => setPoems(p))
+        if(type == "mine"){
+            PoetryService.getAllPoems(page, itemsPerPage)
+                .then(p => setPoems(p))
+        }else{
+            PoetryService.getMyPoems(page, itemsPerPage)
+                .then(p => setPoems(p))
+        }
+       
     }, [page])
+
+
+    const onPoemDelete = (poem) => {
+        setPoems(poems.filter(x => x.id != poem.id))
+    }
 
     return <Stack spacing={4} alignItems="center">
         <ResponsiveAppBar/>
-        <PoetryList poems={poems}/>
+        <PoetryList poems={poems} withDelete={type === "mine"} onPoemDelete={onPoemDelete}/>
         <PoetryPagination type={type}/>
     </Stack>
 }

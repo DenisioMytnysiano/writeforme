@@ -6,18 +6,17 @@ import GenerationService from '../../services/generation.service'
 import BouncingDotsLoader from "../common/BouncingDotsLoader";
 import { Typography } from "@mui/material";
 
-const PoemGenerationForm = () => {
+const PoemGenerationForm = ({onPoemGenerated}) => {
     const [rhymingScheme, setRhymingScheme] = useState()
     const [textPrompt, setTextPrompt] = useState()
     const [isLoading, setIsLoading] = useState(false)
-    const [poem, setPoem] = useState("")
 
     const generate = (e) => {
         setIsLoading(true)
         GenerationService.generate(rhymingScheme, textPrompt)
             .then(poem => {
-                setPoem(poem);
                 setIsLoading(false);
+                onPoemGenerated(poem);
             })
     }
 
@@ -30,7 +29,6 @@ const PoemGenerationForm = () => {
                 </Stack>
                 <Button variant="contained" style={{ width: "20%", minWidth: "200px" }} onClick={(e) => generate(e)}>Generate poetry</Button>
                 {isLoading && <BouncingDotsLoader text="Generation in progress" />}
-                {poem && !isLoading && <Typography>{poem}</Typography>}
             </Stack>
         </Container >
     )

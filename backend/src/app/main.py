@@ -1,18 +1,21 @@
 import uvicorn
-from api.api import api_router
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy_utils import create_database, database_exists
+
+from api.api import api_router
 from infrastructure.db.models import Base
 from infrastructure.db.session import engine
-from sqlalchemy_utils import create_database, database_exists
-from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI(title="WriteForMe", openapi_url=f"/openapi.json")
+app = FastAPI(title="WriteForMe", openapi_url="/openapi.json")
 
-app.add_middleware(CORSMiddleware, 
+app.add_middleware(
+    CORSMiddleware,
     allow_origins=["http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"],)
+    allow_headers=["*"],
+)
 app.include_router(api_router)
 
 

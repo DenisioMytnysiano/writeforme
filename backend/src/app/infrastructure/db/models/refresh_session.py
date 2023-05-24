@@ -1,8 +1,9 @@
 import uuid
 
-from infrastructure.db.models.base import Base
 from sqlalchemy import Column, String
 from sqlalchemy.dialects.postgresql import UUID
+
+from infrastructure.db.models.base import Base
 
 
 class RefreshSession(Base):

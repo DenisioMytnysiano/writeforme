@@ -4,7 +4,7 @@ from fastapi import Depends, HTTPException, Request, status
 from fastapi.openapi.models import OAuthFlows as OAuthFlowsModel
 from fastapi.security import OAuth2
 from fastapi.security.utils import get_authorization_scheme_param
-from infrastructure.auth.auth_token_pair import AuthTokenPair
+
 from infrastructure.security.token_service import TokenService
 
 
@@ -27,7 +27,7 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
         refresh_token = self.get_refresh_token_from_cookie(request)
         tokenService.verify(refresh_token)
         return refresh_token
-    
+
     def get_refresh_token_from_cookie(self, request: Request):
         authorization: str = request.cookies.get("refresh_token")
         scheme, refresh_token = get_authorization_scheme_param(authorization)

@@ -1,6 +1,7 @@
 from typing import Collection, NoReturn, Optional
 
 from fastapi import Depends
+
 from hexagon.domain.poem import Poem
 from hexagon.ports.poem_repository import PoemRepositoryProtocol
 from infrastructure.repositories.poem_repository import PoemRepository
@@ -18,13 +19,15 @@ class PoemService:
     def get_all_poems_by_user(
         self, created_by: str, page: int, items_per_page: int
     ) -> Collection[Poem]:
-        return self.__poem_repository.get_all_poems_by_user(created_by, page, items_per_page)
+        return self.__poem_repository.get_all_poems_by_user(
+            created_by, page, items_per_page
+        )
 
-    def get_poem(self, id: str) -> Optional[Poem]:
-        return self.__poem_repository.get_poem(id)
-    
+    def get_poem(self, identifier: str) -> Optional[Poem]:
+        return self.__poem_repository.get_poem(identifier)
+
     def add_poem(self, poem: Poem) -> NoReturn:
         self.__poem_repository.add_poem(poem)
 
-    def delete_poem(self, id: str) -> NoReturn:
-        return self.__poem_repository.delete_poem(id)
+    def delete_poem(self, identifier: str) -> NoReturn:
+        return self.__poem_repository.delete_poem(identifier)

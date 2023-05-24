@@ -50,7 +50,7 @@ class AuthService {
     static async logout() {
         const http = new HttpService({ withAuth: true });
         await http.post('/auth/logout');
-        AuthStore.resetAuthData();
+        AuthStore.resetAuthData()
     }
 
     static isAccessTokenExpired() {

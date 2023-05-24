@@ -4,7 +4,6 @@ from hexagon.domain.poem import Poem
 
 
 class PoemRepositoryProtocol(Protocol):
-    
     def get_all_poems(self, page: int, items_per_page: int) -> Collection[Poem]:
         pass
 

@@ -1,9 +1,10 @@
 from datetime import datetime, timedelta
 from typing import Optional, Protocol
 
+from jose import JWTError, jwt
+
 from infrastructure.auth.auth_token_pair import AuthTokenPair
 from infrastructure.config import config
-from jose import JWTError, jwt
 
 
 class TokenServiceProtocol(Protocol):
@@ -39,4 +40,6 @@ class TokenService:
             return False
 
     def payload(self, token: str) -> str:
-        return jwt.decode(token, config.JWT_SETTINGS.SECRET_KEY, config.JWT_SETTINGS.JWT_ALGORITHM)
+        return jwt.decode(
+            token, config.JWT_SETTINGS.SECRET_KEY, config.JWT_SETTINGS.JWT_ALGORITHM
+        )

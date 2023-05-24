@@ -4,7 +4,7 @@ const RhymingSchemeSelector = ({onChange}) => {
   return (
     <TextField 
       id="demo-simple-select" 
-      value={"ABAB"} 
+      defaultValue={"ABAB"} 
       label="Rhyme" 
       select
       style={{width: 100}}
