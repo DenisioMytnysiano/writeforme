@@ -19,12 +19,12 @@ class AuthService {
         }
     }
 
-    static async register(email, password) {
+    static async register(name, email, password) {
         try {
             const http = new HttpService();
             await http.post(
                 '/auth/register',
-                { email, password },
+                { name, email, password },
                 { withCredentials: true }
             );
         } catch (error) {

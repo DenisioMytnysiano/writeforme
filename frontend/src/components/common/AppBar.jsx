@@ -12,11 +12,18 @@ import MenuItem from '@mui/material/MenuItem';
 import AuthService from '../../services/auth.service';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
-
+import authStore from '../../stores/auth.store';
+import UserService from '../../services/user.service';
 
 function ResponsiveAppBar() {
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [user, setUser] = React.useState("");
+
+  React.useEffect(() => {
+    UserService.getUserByEmail(authStore.getCurrentEmail())
+      .then(u => setUser(u.name))
+  }, [])
   const navigate = useNavigate();
 
   const handleOpenUserMenu = (event) => {
@@ -108,10 +115,10 @@ function ResponsiveAppBar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}></Box>
           {AuthService.isAuthenticated() ?
-            (<><Typography sx={{ paddingRight: 1 }}>Denys Mytnyk</Typography><Box sx={{ flexGrow: 0 }}>
+            (<><Typography sx={{ paddingRight: 1 }}>{user}</Typography><Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar alt={user} src="/static/images/avatar/2.jpg" />
                 </IconButton>
               </Tooltip>
               <Menu

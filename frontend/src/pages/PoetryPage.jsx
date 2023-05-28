@@ -16,14 +16,14 @@ const PoetryPage = ({type}) => {
     const [poems, setPoems] = useState([])
     useEffect(() => {
         if(type == "mine"){
-            PoetryService.getAllPoems(page, itemsPerPage)
+            PoetryService.getMyPoems(page, itemsPerPage)
                 .then(p => setPoems(p))
         }else{
-            PoetryService.getMyPoems(page, itemsPerPage)
+            PoetryService.getAllPoems(page, itemsPerPage)
                 .then(p => setPoems(p))
         }
        
-    }, [page])
+    }, [type, page])
 
 
     const onPoemDelete = (poem) => {

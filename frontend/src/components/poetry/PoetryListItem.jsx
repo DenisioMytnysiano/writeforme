@@ -15,7 +15,7 @@ const PoetryListItem = ({poem, withDelete, onPoemDelete}) => {
     }
     return <Box sx={{ flexDirection: 'row' }}>
         <Card variant="outlined" onClick={handleClick}>
-            <Typography height="50px" fontSize={30} lineHeight="50px">{poem.text}</Typography>
+            <Typography height="50px" fontSize={30} lineHeight="50px">{poem.title}</Typography>
         </Card>
         {withDelete && <Button onClick = {handleDelete}>Delete</Button>}
     </Box>

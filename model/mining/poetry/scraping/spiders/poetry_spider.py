@@ -1,7 +1,7 @@
 import scrapy
 from bs4 import BeautifulSoup
 from scraping.items import Poem
-
+from typing import List
 
 class PoetrySpider(scrapy.Spider):
     name = 'poetry'
@@ -27,7 +27,7 @@ class PoetrySpider(scrapy.Spider):
             s.extract()
         return self.clean_poem(soup.find_all(text=True))
 
-    def clean_poem(self, poem: list[str]) -> str:
+    def clean_poem(self, poem: List[str]) -> str:
         cleaned = []
         for line in poem:
             remove_newline = line.replace("\n", "")

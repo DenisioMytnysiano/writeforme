@@ -23,7 +23,7 @@ class PoetryService{
     static async save(poem){
         const http = HttpService({withAuth: true})
         const response = await http.post("/poems/save", {
-            title: poem.split("\n")[0].trim(),
+            title: poem.split("\n")[0].trim().replaceAll(",", ""),
             text: poem
         });
         return response.data; 
