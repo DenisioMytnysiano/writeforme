@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useState } from "react"
 import PoetryService from "../services/poetry.service"
 import PoetryPagination from "../components/poetry/PoetryPagination";

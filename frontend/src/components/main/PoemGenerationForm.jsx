@@ -1,3 +1,4 @@
+import React from 'react';
 import { Stack, Container, Button } from "@mui/material";
 import RhymingSchemeSelector from './RhymingSchemeSelector';
 import PoemSeedInput from './PoemSeedInput';
