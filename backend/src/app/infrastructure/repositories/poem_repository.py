@@ -41,8 +41,8 @@ class PoemRepository:
             for poem_db in poems
         ]
 
-    def get_poem(self, id: UUID) -> Optional[Poem]:
-        poem = self.__db_session.query(PoemDB).where(PoemDB.id == id).first()
+    def get_poem(self, identifier: UUID) -> Optional[Poem]:
+        poem = self.__db_session.query(PoemDB).where(PoemDB.id == identifier).first()
         if poem:
             return Poem(poem.id, poem.title, poem.created_by, poem.text)
         return None
@@ -54,7 +54,7 @@ class PoemRepository:
         self.__db_session.add(poem)
         self.__db_session.commit()
 
-    def delete_poem(self, id: str) -> NoReturn:
-        poem = self.__db_session.query(PoemDB).where(PoemDB.id == id)
+    def delete_poem(self, identifier: str) -> NoReturn:
+        poem = self.__db_session.query(PoemDB).where(PoemDB.id == identifier)
         poem.delete()
         self.__db_session.commit()

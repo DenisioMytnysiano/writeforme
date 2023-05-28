@@ -12,11 +12,11 @@ class PoemServiceProtocol(Protocol):
     ) -> Collection[Poem]:
         pass
 
-    def get_poem(self, id: str) -> Poem:
+    def get_poem(self, identifier: str) -> Poem:
         pass
 
     def add_poem(self, poem: Poem) -> NoReturn:
         pass
 
-    def delete_poem(self, id: str) -> NoReturn:
+    def delete_poem(self, identifier: str) -> NoReturn:
         pass

@@ -12,11 +12,11 @@ class PoemRepositoryProtocol(Protocol):
     ) -> Collection[Poem]:
         pass
 
-    def get_poem(self, id: str) -> Optional[Poem]:
+    def get_poem(self, identifier: str) -> Optional[Poem]:
         pass
 
     def add_poem(self, poem: Poem) -> NoReturn:
         pass
 
-    def delete_poem(self, id: str) -> NoReturn:
+    def delete_poem(self, identifier: str) -> NoReturn:
         pass
