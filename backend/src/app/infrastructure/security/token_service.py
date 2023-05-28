@@ -1,10 +1,9 @@
 from datetime import datetime, timedelta
 from typing import Optional, Protocol
 
-from jose import JWTError, jwt
-
 from infrastructure.auth.auth_token_pair import AuthTokenPair
 from infrastructure.config import config
+from jose import JWTError, jwt
 
 
 class TokenServiceProtocol(Protocol):

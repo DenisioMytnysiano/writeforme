@@ -1,5 +1,4 @@
 from fastapi import Depends, HTTPException
-
 from hexagon.domain.user import User
 from hexagon.ports.user_service import UserServiceProtocol
 from hexagon.use_cases.user_service import UserService

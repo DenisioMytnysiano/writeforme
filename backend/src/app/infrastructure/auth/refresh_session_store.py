@@ -1,10 +1,9 @@
 from typing import NoReturn, Optional, Protocol
 
 from fastapi import Depends
-from sqlalchemy.orm import Session
-
 from infrastructure.db.models.refresh_session import RefreshSession
 from infrastructure.db.session import get_db
+from sqlalchemy.orm import Session
 
 
 class RefreshSessionStoreProtocol(Protocol):

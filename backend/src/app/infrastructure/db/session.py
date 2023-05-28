@@ -1,9 +1,8 @@
 from typing import Generator
 
+from infrastructure.config import config
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-
-from infrastructure.config import config
 
 SQLALCHEMY_DATABASE_URL = config.DB_SETTINGS.DATABASE_URL
 

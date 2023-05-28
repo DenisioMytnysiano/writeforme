@@ -2,7 +2,6 @@ from typing import NoReturn, Optional
 from uuid import UUID
 
 from fastapi import Depends
-
 from hexagon.domain.user import User
 from hexagon.ports.user_repository import UserRepositoryProtocol
 from infrastructure.repositories.user_repository import UserRepository

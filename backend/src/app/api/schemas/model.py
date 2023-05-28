@@ -1,3 +1,4 @@
+from pydantic import BaseModel
 from hexagon.domain.rhyming_scheme import RhymingScheme
 
 

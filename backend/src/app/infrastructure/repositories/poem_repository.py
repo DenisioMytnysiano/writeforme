@@ -2,11 +2,10 @@ from typing import Collection, NoReturn, Optional
 from uuid import UUID
 
 from fastapi import Depends
-from sqlalchemy.orm import Session
-
 from hexagon.domain.poem import Poem
 from infrastructure.db.models.poem import Poem as PoemDB
 from infrastructure.db.session import get_db
+from sqlalchemy.orm import Session
 
 
 class PoemRepository:

@@ -1,7 +1,6 @@
 from typing import Collection, NoReturn, Optional
 
 from fastapi import Depends
-
 from hexagon.domain.poem import Poem
 from hexagon.ports.poem_repository import PoemRepositoryProtocol
 from infrastructure.repositories.poem_repository import PoemRepository

@@ -1,7 +1,6 @@
-from fastapi import APIRouter, Depends
-
 from api.deps import get_authorized_user
 from api.schemas.model import GeneratePoemRequest, GeneratePoemResponse
+from fastapi import APIRouter, Depends
 from hexagon.domain.user import User
 from hexagon.ports.model_service import ModelServiceProtocol
 from hexagon.use_cases.model_service import ModelService

@@ -2,11 +2,10 @@ from typing import NoReturn, Optional
 from uuid import UUID
 
 from fastapi import Depends
-from sqlalchemy.orm import Session
-
 from hexagon.domain.user import User
 from infrastructure.db.models import User as UserDB
 from infrastructure.db.session import get_db
+from sqlalchemy.orm import Session
 
 
 class UserRepository:

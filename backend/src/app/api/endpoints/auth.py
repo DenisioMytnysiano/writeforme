@@ -1,11 +1,5 @@
+from api.schemas.auth import LoginRequest, RefreshTokenRequest, RegisterRequest, TokenResponse
 from fastapi import APIRouter, Depends, Response
-
-from api.schemas.auth import (
-    LoginRequest,
-    RefreshTokenRequest,
-    RegisterRequest,
-    TokenResponse,
-)
 from infrastructure.auth.auth_service import AuthService, AuthServiceProtocol
 from infrastructure.auth.auth_token_pair import AuthTokenPair
 from infrastructure.auth.oauth_bearer_cookie import jwtRefreshTokenBearer
@@ -29,7 +23,7 @@ def login(response: Response, user: LoginRequest, auth_service=Depends(AuthServi
 def register(
     user: RegisterRequest, auth_service: AuthServiceProtocol = Depends(AuthService)
 ):
-    return auth_service.register(user.email, user.password)
+    return auth_service.register(user.name, user.email, user.password)
 
 
 @router.post("/refresh-token", response_model=TokenResponse)

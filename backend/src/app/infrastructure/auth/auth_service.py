@@ -3,15 +3,11 @@ from datetime import datetime
 from typing import NoReturn, Protocol
 
 from fastapi import Depends
-
 from hexagon.domain.user import User
 from hexagon.ports.user_service import UserServiceProtocol
 from hexagon.use_cases.user_service import UserService
 from infrastructure.auth.auth_token_pair import AuthTokenPair
-from infrastructure.auth.refresh_session_store import (
-    RefreshSessionStore,
-    RefreshSessionStoreProtocol,
-)
+from infrastructure.auth.refresh_session_store import RefreshSessionStore, RefreshSessionStoreProtocol
 from infrastructure.config import config
 from infrastructure.db.models.refresh_session import RefreshSession
 from infrastructure.security.hasher import Hasher
@@ -19,7 +15,7 @@ from infrastructure.security.token_service import TokenService, TokenServiceProt
 
 
 class AuthServiceProtocol(Protocol):
-    def register(self, email: str, password: str) -> NoReturn:
+    def register(self, name: str, email: str, password: str) -> NoReturn:
         pass
 
     def login(self, email: str, password: str, fingerprint: str) -> AuthTokenPair:
@@ -28,7 +24,7 @@ class AuthServiceProtocol(Protocol):
     def refresh_token(self, refresh_token: str, fingerprint: str) -> AuthTokenPair:
         pass
 
-    def logout(self, tokens: AuthTokenPair) -> NoReturn:
+    def logout(self, refresh_token: str) -> NoReturn:
         pass
 
 
@@ -48,7 +44,7 @@ class AuthService:
         self.__token_service = token_service
         self.__refresh_session_store = refresh_session_store
 
-    def register(self, email: str, password: str) -> NoReturn:
+    def register(self, name: str, email: str, password: str) -> NoReturn:
         is_registered = self.__user_repository.get_user_by_email(email)
         if is_registered:
             raise Exception("User already registered with email.")
@@ -57,7 +53,7 @@ class AuthService:
             User(
                 id=uuid.uuid4(),
                 email=email,
-                name="test",
+                name=name,
                 hashed_pasword=hashed_password,
             )
         )
@@ -98,9 +94,7 @@ class AuthService:
         )
         return AuthTokenPair(access_token, refresh_token)
 
-    def logout(self, tokens: AuthTokenPair) -> NoReturn:
-        session = self.__refresh_session_store.delete_and_get_session(
-            tokens.refresh_token
-        )
+    def logout(self, refresh_token: str) -> NoReturn:
+        session = self.__refresh_session_store.delete_and_get_session(refresh_token)
         if not session:
             raise Exception("Session not found")
