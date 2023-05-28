@@ -5,7 +5,7 @@ import PoemSeedInput from './PoemSeedInput';
 import { useState } from "react";
 import GenerationService from '../../services/generation.service'
 import BouncingDotsLoader from "../common/BouncingDotsLoader";
-import { Typography } from "@mui/material";
+import PropTypes from 'prop-types';
 
 const PoemGenerationForm = ({onPoemGenerated}) => {
     const [rhymingScheme, setRhymingScheme] = useState()
@@ -33,6 +33,10 @@ const PoemGenerationForm = ({onPoemGenerated}) => {
             </Stack>
         </Container >
     )
+}
+
+PoemGenerationForm.propTypes = {
+    onPoemGenerated: PropTypes.func
 }
 
 export default PoemGenerationForm;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { TextField } from "@mui/material";
+import PropTypes from 'prop-types';
 
 const PoemSeedInput = ({onChange}) => {
     return (
@@ -13,6 +14,10 @@ const PoemSeedInput = ({onChange}) => {
             onChange = {(e) => onChange(e.target.value)}
           />
     )
+}
+
+PoemSeedInput.propTypes = {
+    onChange: PropTypes.func
 }
 
 export default PoemSeedInput;

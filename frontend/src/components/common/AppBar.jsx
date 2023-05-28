@@ -19,12 +19,12 @@ function ResponsiveAppBar() {
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [user, setUser] = React.useState("");
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     UserService.getUserByEmail(authStore.getCurrentEmail())
       .then(u => setUser(u.name))
   }, [])
-  const navigate = useNavigate();
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);

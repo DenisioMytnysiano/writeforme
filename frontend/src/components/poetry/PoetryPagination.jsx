@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
+import PropTypes from "prop-types";
 
 const PoetryPagination = ({type}) => {
   
@@ -24,5 +25,8 @@ const PoetryPagination = ({type}) => {
   );
 }
 
+PoetryPagination.propTypes = {
+  type: PropTypes.string
+}
 
 export default PoetryPagination;

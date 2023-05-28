@@ -3,6 +3,8 @@ import { Button, Typography } from "@mui/material";
 import { Card, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import PoetryService from "../../services/poetry.service";
+import PropTypes from "prop-types";
+
 const PoetryListItem = ({poem, withDelete, onPoemDelete}) => {
     const navigate = useNavigate();
 
@@ -20,6 +22,12 @@ const PoetryListItem = ({poem, withDelete, onPoemDelete}) => {
         </Card>
         {withDelete && <Button onClick = {handleDelete}>Delete</Button>}
     </Box>
+}
+
+PoetryListItem.propTypes = {
+    poem: PropTypes.object,
+    withDelete: PropTypes.bool,
+    onPoemDelete: PropTypes.func
 }
 
 export default PoetryListItem;

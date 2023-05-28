@@ -1,5 +1,6 @@
 import React from "react";
 import './BouncingDotsLoader.css';
+import PropTypes from 'prop-types';
 
 const BouncingDotsLoader = ({text}) => {
     return (
@@ -14,5 +15,8 @@ const BouncingDotsLoader = ({text}) => {
     )
 };
 
+BouncingDotsLoader.propTypes = {
+    text: PropTypes.string
+}
 
 export default BouncingDotsLoader;
