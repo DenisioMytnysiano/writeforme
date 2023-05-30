@@ -5,7 +5,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import AuthService from '../../services/auth.service';
 import {useNavigate} from 'react-router-dom';
-import validateEmail from '../../utils/email-validator';
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
