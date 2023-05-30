@@ -1,4 +1,4 @@
-import { Card, Typography, Stack, Avatar } from "@mui/material";
+import { Typography, Stack, Avatar } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import PoetryService from "../services/poetry.service";

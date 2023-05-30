@@ -15,7 +15,7 @@ import { Button } from '@mui/material';
 import authStore from '../../stores/auth.store';
 import UserService from '../../services/user.service';
 
-function ResponsiveAppBar() {
+const ResponsiveAppBar = () => {
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [user, setUser] = React.useState("");

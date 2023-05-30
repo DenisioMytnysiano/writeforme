@@ -24,14 +24,6 @@ const LoginForm = () => {
 
     const validateState = () => {
         return true;
-        if(!validateEmail(email)){
-            setError("Invalid email value")
-            return false;
-        }
-        if(password.length == 0){
-            setError("Password is empty")
-            return false;
-        }
     }
 
     return (

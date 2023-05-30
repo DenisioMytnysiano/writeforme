@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Typography, Box, Button } from "@mui/material";
+import { Stack, Typography, Button } from "@mui/material";
 import ResponsiveAppBar from '../components/common/AppBar';
 import PoemGenerationForm from "../components/main/PoemGenerationForm";
 import PoemCard from "../components/main/PoemCard";

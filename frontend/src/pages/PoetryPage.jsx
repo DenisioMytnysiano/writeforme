@@ -16,7 +16,7 @@ const PoetryPage = ({type}) => {
 
     const [poems, setPoems] = useState([])
     useEffect(() => {
-        if(type == "mine"){
+        if(type === "mine"){
             PoetryService.getMyPoems(page, itemsPerPage)
                 .then(p => setPoems(p))
         }else{
@@ -28,7 +28,7 @@ const PoetryPage = ({type}) => {
 
 
     const onPoemDelete = (poem) => {
-        setPoems(poems.filter(x => x.id != poem.id))
+        setPoems(poems.filter(x => x.id !== poem.id))
     }
 
     return <Stack spacing={4} alignItems="center">
